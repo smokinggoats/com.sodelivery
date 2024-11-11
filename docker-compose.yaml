@@ -1,0 +1,24 @@
+version: "3"
+services:
+  com.sodelivery:
+    container_name: sodelivery
+    restart: "no"
+    build:
+      context: "."
+      dockerfile: ./Dockerfile
+    env_file:
+      - ".env"
+    ports:
+      - 5173:5173
+    volumes:
+      - ./:/app
+    environment:
+      VITE_DIRECTUS_HOST: $VITE_DIRECTUS_HOST
+    networks:
+      - sodelivery_net
+
+networks:
+  sodelivery_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1300

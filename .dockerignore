@@ -1,0 +1,9 @@
+Dockerfile
+docker-compose.yaml
+cypress
+dist
+.vscode
+.git
+.env
+container
+node_modules

@@ -1,0 +1,14 @@
+query getDeliveryPlaces {
+  delivery_place(sort: "name") {
+    id
+    display_name
+    name
+    description
+    place_point
+    social_links
+    reviews {
+      id
+      rating
+    }
+  }
+}

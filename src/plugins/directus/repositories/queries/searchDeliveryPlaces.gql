@@ -1,0 +1,14 @@
+query searchDeliveryPlaces($input: String!) {
+  delivery_places: delivery_place(search: $input) {
+    id
+    display_name
+    name
+    description
+    place_point
+    social_links
+    reviews {
+      id
+      rating
+    }
+  }
+}

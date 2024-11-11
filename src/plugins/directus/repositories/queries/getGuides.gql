@@ -1,0 +1,13 @@
+query getGuides {
+  guides: guides(sort: "name") {
+    name
+    display_name
+    description
+    places {
+      delivery_place_id {
+        name
+        display_name
+      }
+    }
+  }
+}

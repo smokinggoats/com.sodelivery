@@ -1,0 +1,11 @@
+query getDeliveryPlaceById($id: ID!) {
+  delivery_place: delivery_place_by_id(id: $id) {
+    id
+    display_name
+    name
+    reviews {
+      id
+      rating
+    }
+  }
+}
