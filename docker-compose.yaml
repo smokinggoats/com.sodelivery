@@ -3,6 +3,7 @@ services:
   com.sodelivery:
     container_name: sodelivery
     restart: "no"
+    image: smokinggoats/com.sodelivery
     build:
       context: "."
       dockerfile: ./Dockerfile
