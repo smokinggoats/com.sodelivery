@@ -6,8 +6,8 @@ EXPOSE 5173
 
 COPY ./ /app
 
-RUN npm ci
+RUN make install
 
-RUN npm run build
+RUN make build-web
 
 CMD ["npm", "run", "dev"]
