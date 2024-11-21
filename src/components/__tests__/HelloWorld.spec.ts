@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import Nav from '../Nav/Nav.vue'
+import Nav from '../NavMenu/NavMenu.vue'
 
 describe('HelloWorld', () => {
   it('renders properly', () => {

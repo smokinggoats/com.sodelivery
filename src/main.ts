@@ -26,7 +26,7 @@ const app = createApp(App)
 library.add(...[brands, regular, solid])
 
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.component('markdown', VueMarkdown)
+app.component('markdown-render', VueMarkdown)
 app.use(createPinia())
 app.use(router)
 app.use(DirectusPlugin)

@@ -8,7 +8,7 @@ export const routes = [
   {
     path: '/guides',
     name: 'Guias',
-    component: () => import('../views/Guides/Guides.vue'),
+    component: () => import('../views/Guides/GuidesView.vue'),
   },
   {
     path: '/search',

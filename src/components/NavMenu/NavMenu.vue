@@ -3,6 +3,7 @@
     <nav class="menu__nav" :class="{ 'menu__nav--open': isOpen }">
       <RouterLink
         v-for="link in links"
+        :key="link.path"
         :onClick="handleToggleMenu"
         class="menu__nav__item"
         active-class="menu__nav__item--selected"

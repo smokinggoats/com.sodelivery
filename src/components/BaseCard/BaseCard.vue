@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ title: string }>()
+defineProps<{ title: string }>()
 </script>
 
 <style lang="scss">

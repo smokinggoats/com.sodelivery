@@ -29,7 +29,7 @@ import type { MapBoxInstance } from '@/plugins/map/box'
 import * as L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { inject, onMounted, ref } from 'vue'
-import Loading from '../Loading/Loading.vue'
+import Loading from '../Loading/LoadingCircle.vue'
 
 const directus = inject<DirectusInstance>('directus')
 const mapBoxPlugin = inject<MapBoxInstance>('mapBox')
@@ -47,7 +47,7 @@ class FindMeController extends L.Control {
     super(options)
     this.id = id
   }
-  onAdd(map: L.Map): HTMLElement {
+  onAdd(): HTMLElement {
     return document.querySelector(`#${this.id}`) as HTMLElement
   }
 }

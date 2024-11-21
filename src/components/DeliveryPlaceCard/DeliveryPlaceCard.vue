@@ -1,5 +1,5 @@
 <template>
-  <Card :title="deliveryPlace.display_name">
+  <BaseCard :title="deliveryPlace.display_name">
     <template v-slot:content>
       <div class="card__content__rating">
         Rating: {{ getRating(deliveryPlace.avgRating) }}
@@ -7,6 +7,7 @@
       <div class="card__content__social_icons">
         <a
           v-for="si in deliveryPlace.social_links"
+          :key="si.href"
           :href="si.href"
           target="_blank"
         >
@@ -17,14 +18,14 @@
     <template v-slot:action>
       <button class="card__action__button">Detalhes</button>
     </template>
-  </Card>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
+import BaseCard from '@/components/BaseCard/BaseCard.vue'
 import type { DeliveryPlace } from '@/plugins/directus/repositories/DeliveryPlace.types'
-import Card from '@/components/Card/Card.vue'
 
-const props = defineProps<{ deliveryPlace: DeliveryPlace }>()
+defineProps<{ deliveryPlace: DeliveryPlace }>()
 const getRating = (rating: number) => {
   if (rating > -1) {
     return rating.toFixed(2)

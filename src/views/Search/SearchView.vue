@@ -17,6 +17,7 @@
       <DeliveryPlaceCard
         v-else
         v-for="deliveryPlace in deliveryPlaces"
+        :key="deliveryPlace.id"
         :delivery-place="deliveryPlace"
       ></DeliveryPlaceCard>
     </div>
@@ -24,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import Loading from '@/components/Loading/Loading.vue'
+import Loading from '@/components/Loading/LoadingCircle.vue'
 import DeliveryPlaceCard from '@/components/DeliveryPlaceCard/DeliveryPlaceCard.vue'
 import type { DirectusInstance } from '@/plugins/directus'
 import { DeliveryPlaceRepository } from '@/plugins/directus/repositories/DeliveryPlace'
@@ -38,7 +39,7 @@ const searching = ref(false)
 const deliveryPlaces = ref([] as DeliveryPlace[])
 const deliveryPlaceRepository = DeliveryPlaceRepository(directus)
 async function search(event: Event) {
-  //@ts-expect-error
+  //@ts-expect-error: event undefined already handled
   const input = event?.target.value
   const shouldSearch = input && searchInput.value !== input && !searching.value
 

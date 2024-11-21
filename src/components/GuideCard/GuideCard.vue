@@ -1,30 +1,20 @@
 <template>
-  <Card :title="guide.display_name">
+  <BaseCard :title="guide.display_name">
     <template v-slot:content>
-      <markdown :source="guide.description" />
+      <markdown-render :source="guide.description" />
       <ul>
-        <li v-for="place in guide.places.slice(0, 5)">
+        <li v-for="place in guide.places.slice(0, 5)" :key="place.name">
           {{ place.display_name }}
         </li>
       </ul>
     </template>
     <template v-slot:action></template>
-  </Card>
+  </BaseCard>
 </template>
 
 <script setup lang="ts">
 import type { Guide } from '@/plugins/directus/repositories/Guides'
-import Card from '@/components/Card/Card.vue'
+import BaseCard from '@/components/BaseCard/BaseCard.vue'
 
-const props = defineProps<{ guide: Guide }>()
+defineProps<{ guide: Guide }>()
 </script>
-
-<style lang="scss">
-.card {
-  &__content {
-  }
-
-  &__action {
-  }
-}
-</style>

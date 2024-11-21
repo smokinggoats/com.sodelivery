@@ -1,13 +1,18 @@
 <template>
   <div class="guides_view" :class="{ 'guides_view--loading': loadingGuides }">
     <Loading size="large" :loading="loadingGuides" v-if="loadingGuides" />
-    <Card v-else v-for="guide in guides" :guide="guide" />
+    <GuideCard
+      v-else
+      v-for="guide in guides"
+      :guide="guide"
+      :key="guide.name"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import Card from '@/components/GuideCard/GuideCard.vue'
-import Loading from '@/components/Loading/Loading.vue'
+import GuideCard from '@/components/GuideCard/GuideCard.vue'
+import Loading from '@/components/Loading/LoadingCircle.vue'
 import type { DirectusInstance } from '@/plugins/directus'
 import {
   GuidesRepository,

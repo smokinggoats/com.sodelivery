@@ -20,10 +20,10 @@ const WGS84_b = 6356752.3 // Minor semiaxis [m]
 // Earth radius at a given latitude, according to the WGS-84 ellipsoid [m]
 function WGS84EarthRadius(lat: number) {
   // http://en.wikipedia.org/wiki/Earth_radius
-  var An = WGS84_a * WGS84_a * Math.cos(lat)
-  var Bn = WGS84_b * WGS84_b * Math.sin(lat)
-  var Ad = WGS84_a * Math.cos(lat)
-  var Bd = WGS84_b * Math.sin(lat)
+  const An = WGS84_a * WGS84_a * Math.cos(lat)
+  const Bn = WGS84_b * WGS84_b * Math.sin(lat)
+  const Ad = WGS84_a * Math.cos(lat)
+  const Bd = WGS84_b * Math.sin(lat)
   return Math.sqrt((An * An + Bn * Bn) / (Ad * Ad + Bd * Bd))
 }
 

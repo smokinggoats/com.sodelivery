@@ -11,6 +11,7 @@
     <Card
       v-else
       v-for="deliveryPlace in deliveryPlaces"
+      :key="deliveryPlace.id"
       :deliveryPlace="deliveryPlace"
     />
   </div>
@@ -18,7 +19,7 @@
 
 <script setup lang="ts">
 import Card from '@/components/DeliveryPlaceCard/DeliveryPlaceCard.vue'
-import Loading from '@/components/Loading/Loading.vue'
+import Loading from '@/components/Loading/LoadingCircle.vue'
 import type { DirectusInstance } from '@/plugins/directus'
 import { DeliveryPlaceRepository } from '@/plugins/directus/repositories/DeliveryPlace'
 import type { DeliveryPlace } from '@/plugins/directus/repositories/DeliveryPlace.types'

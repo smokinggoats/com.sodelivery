@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
   loading: boolean
   size?: 'default' | 'large'
 }>()
