@@ -1,0 +1,16 @@
+query geoSearchDeliveryPlaces($input: GraphQLGeoJSON) {
+  delivery_places: delivery_place(
+    filter: { place_point: { _intersects: $input } }
+  ) {
+    id
+    display_name
+    name
+    description
+    place_point
+    social_links
+    reviews {
+      id
+      rating
+    }
+  }
+}

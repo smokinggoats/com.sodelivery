@@ -15,4 +15,5 @@ export type DeliveryPlace = {
   avgRating: number
   reviews: Review[]
   social_links: SocialLink[]
+  place_point: GeoJSON.Point
 }

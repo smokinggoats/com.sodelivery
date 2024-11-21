@@ -6,6 +6,7 @@ import type {
 import GetDeliveryPlaceByIdGql from '@/plugins/directus/repositories/queries/getDeliveryPlaceById.gql'
 import GetDeliveryPlacesGql from '@/plugins/directus/repositories/queries/getDeliveryPlaces.gql'
 import SearchDeliveryPlacesGql from '@/plugins/directus/repositories/queries/searchDeliveryPlaces.gql'
+import GeoSearchDeliveryPlacesGql from '@/plugins/directus/repositories/queries/geoSearchDeliveryPlaces.gql'
 import { safeDivide, sum } from '@/utils/math'
 
 export function calculateReviewAverage<T extends number, K extends Review>(
@@ -52,6 +53,12 @@ export function DeliveryPlaceRepository(directus?: DirectusInstance) {
       const result = await this.directus.client.query<{
         delivery_places: DeliveryPlace[]
       }>(SearchDeliveryPlacesGql.loc?.source.body || '', { input })
+      return (result.delivery_places || []).map(parseDeliveryPlace)
+    },
+    async geoSearchDeliveryPlaces(input: GeoJSON.GeoJSON) {
+      const result = await this.directus.client.query<{
+        delivery_places: DeliveryPlace[]
+      }>(GeoSearchDeliveryPlacesGql.loc?.source.body || '', { input })
       return (result.delivery_places || []).map(parseDeliveryPlace)
     },
   }
