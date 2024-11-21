@@ -11,19 +11,11 @@
         :value="searchInput"
       />
       <label for="search" class="search_input__label">Busca</label>
-      <!-- <span v-if="deliveryPlaces.length === 0 && searchInput === ''">
-        Comece buscando pelo nome de um restaurante
-      </span>
-      <span
-        v-if="
-          deliveryPlaces.length === 0 && searchInput.length > 0 && !searching
-        "
-      >
-        Nenhum lugar encontrado com '{{ searchInput }}'
-      </span> -->
     </div>
-    <div class="search_result">
+    <div class="search_result" :class="{ 'search_result--loading': searching }">
+      <Loading v-if="searching" :loading="searching" size="large" />
       <DeliveryPlaceCard
+        v-else
         v-for="deliveryPlace in deliveryPlaces"
         :delivery-place="deliveryPlace"
       ></DeliveryPlaceCard>
@@ -32,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import Loading from '@/components/Loading/Loading.vue'
 import DeliveryPlaceCard from '@/components/DeliveryPlaceCard/DeliveryPlaceCard.vue'
 import type { DirectusInstance } from '@/plugins/directus'
 import { DeliveryPlaceRepository } from '@/plugins/directus/repositories/DeliveryPlace'
@@ -48,7 +41,7 @@ async function search(event: Event) {
   //@ts-expect-error
   const input = event?.target.value
   const shouldSearch = input && searchInput.value !== input && !searching.value
-  
+
   if (shouldSearch) {
     searching.value = true
     try {
@@ -118,10 +111,16 @@ async function search(event: Event) {
   box-sizing: border-box;
   position: relative;
   grid-gap: 1rem;
+  &--loading {
+    justify-items: center;
+  }
 }
 @media (min-width: 40em) {
   .search_result {
     grid-template-columns: repeat(2, 50%);
+    &--loading {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
   .search_input {
     width: 50%;
@@ -130,6 +129,9 @@ async function search(event: Event) {
 @media (min-width: 120em) {
   .search_result {
     grid-template-columns: repeat(4, 25%);
+    &--loading {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 
   .search_input {

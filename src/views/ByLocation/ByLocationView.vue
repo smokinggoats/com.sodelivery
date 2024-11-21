@@ -10,7 +10,7 @@ import Map from '@/components/Map/Map.vue'
       <font-awesome-icon icon="fa-solid fa-person-digging" /> Em construção
     </h2>
     &nbsp;
-    <Map></Map>
+    <Map ref="map"></Map>
   </div>
 </template>
 

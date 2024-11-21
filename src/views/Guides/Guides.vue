@@ -1,11 +1,13 @@
 <template>
-  <div class="guides_view">
-    <Card v-for="guide in guides" :guide="guide" />
+  <div class="guides_view" :class="{ 'guides_view--loading': loadingGuides }">
+    <Loading size="large" :loading="loadingGuides" v-if="loadingGuides" />
+    <Card v-else v-for="guide in guides" :guide="guide" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Card from '@/components/GuideCard/GuideCard.vue'
+import Loading from '@/components/Loading/Loading.vue'
 import type { DirectusInstance } from '@/plugins/directus'
 import {
   GuidesRepository,
@@ -17,7 +19,17 @@ const directus = inject<DirectusInstance>('directus')
 
 const guides = ref([] as Guide[])
 const guidesRepository = GuidesRepository(directus)
-guides.value = await guidesRepository.getGuides()
+
+const loadingGuides = ref(false)
+try {
+  loadingGuides.value = true
+  const result = (guides.value = await guidesRepository.getGuides())
+  guides.value = result
+} catch (error) {
+  console.error({ error })
+} finally {
+  loadingGuides.value = false
+}
 </script>
 
 <style lang="scss">
@@ -31,15 +43,27 @@ guides.value = await guidesRepository.getGuides()
   box-sizing: border-box;
   position: relative;
   grid-gap: 1rem;
+  &--loading {
+    justify-content: center;
+    text-align: center;
+    grid-template-columns: repeat(1, 100%);
+    justify-items: center;
+  }
 }
 @media (min-width: 40em) {
   .guides_view {
     grid-template-columns: repeat(2, 50%);
+    &--loading {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 }
 @media (min-width: 120em) {
   .guides_view {
     grid-template-columns: repeat(4, 25%);
+    &--loading {
+      grid-template-columns: repeat(1, 100%);
+    }
   }
 }
 </style>
