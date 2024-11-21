@@ -19,6 +19,7 @@ import { far as regular } from '@fortawesome/free-regular-svg-icons'
 import { fas as solid } from '@fortawesome/free-solid-svg-icons'
 
 import VueMarkdown from 'vue-markdown-render'
+import { MapBoxPlugin } from './plugins/map/box'
 
 const app = createApp(App)
 
@@ -29,5 +30,6 @@ app.component('markdown', VueMarkdown)
 app.use(createPinia())
 app.use(router)
 app.use(DirectusPlugin)
+app.use(MapBoxPlugin)
 
 app.mount('#app')
